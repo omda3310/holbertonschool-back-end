@@ -18,7 +18,6 @@ if __name__ == "___main()__":
         todo_ok = todo.json()
         if not us_ok or not todo_ok:
             print("error")
-            return
         done_list = []
         for line in todo:
             if line.get("completed") is True:
