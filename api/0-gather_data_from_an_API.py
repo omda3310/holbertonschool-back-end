@@ -21,4 +21,4 @@ if __name__ == "___main()__":
     print("Employee {} is done with tasks({}/{}):".format(
         us["name"], len(done_list), len(todo)))
     for done in done_list:
-        print("\t {}".format(done))
+        print("\t {}: OK".format(done))
