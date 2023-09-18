@@ -18,7 +18,7 @@ def first_line(id):
     done_list = []
 
     resp_user = requests.get(users_url)
-    resp = requests.get(todos_url).json()
+    resp = requests.get(todos_url)
 
     if resp_user.status_code == 200 and resp.status_code == 200:
         us_ok = resp_user.json()
