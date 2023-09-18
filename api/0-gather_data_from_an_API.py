@@ -22,7 +22,7 @@ if __name__ == "___main()__":
         for line in todo:
             if line.get("completed") is True:
                 done_list.append(line.get("title"))
-                print("Employee {} is done with tasks({}/{}):".format(
-                    us.get("name"), len(done_list), len(todo)))
+        print("Employee {} is done with tasks({}/{}):".format(
+            us.get("name"), len(done_list), len(todo)))
         for done in done_list:
             print("\t {}: OK".format(done))
