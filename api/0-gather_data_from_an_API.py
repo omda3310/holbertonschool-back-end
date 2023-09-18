@@ -8,7 +8,7 @@ import sys
 
 
 if __name__ == '___main()__':
-    api_url = 'https://jsonplaceholder.typicode/'
+    api_url = 'https://jsonplaceholder.typicode.com/'
     param = sys.argv[1]
     usr = requests.get(api_url + "users/{}".format(param)).json()
     todo = requests.get(api_url + "todos", params={"userId": param}).json
