@@ -17,12 +17,19 @@ def first_line(id):
     todos_done = 0
     done_list = []
 
-    resp_user = requests.get(users_url).json()
+    resp_user = requests.get(users_url)
+    resp = requests.get(todos_url).json()
+
+    if resp_user.status_code == 200 and resp.status_code == 200:
+        us_ok = resp_user.json()
+        todo_ok = resp.json()
+        if not us_ok or not todo_ok:
+            print("error")
     name = None
     for j in resp_user:
         if j[id] == id:
             name = j[id]
-    resp = requests.get(todos_url).json()
+
     for i in resp:
         if i['userId'] == id:
             todos_count += 1
