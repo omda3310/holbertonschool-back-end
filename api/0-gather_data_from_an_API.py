@@ -35,11 +35,11 @@ def first_line(id):
             todos_count += 1
         if (i['completed'] and i['userId'] == id):
             todos_done += 1
-            done_list.append(i['title'])
+            done_list.append(i.get('title'))
     print("Employee {} is done with tasks({}/{}):".format(
         name, todos_done, todos_count))
     for done in done_list:
-        print("\t {}: OK".format(done))
+        print("\t {}: OK".format(done.get('title')))
 
 
 if __name__ == "__main__":
