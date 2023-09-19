@@ -19,6 +19,6 @@ if __name__ == "__main__":
             done_list.append(t.get("title"))
     print("Employee {} is done with tasks({}/{}):".format(
         us_ok.get("name"), len(done_list), len(todo_ok)))
-    
+
     for done in done_list:
         print("\t {}:".format(done))
