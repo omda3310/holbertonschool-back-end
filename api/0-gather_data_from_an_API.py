@@ -6,41 +6,19 @@ Checks student output for returning info from REST API
 import requests
 import sys
 
-users_url = "https://jsonplaceholder.typicode.com/users"
-todos_url = "https://jsonplaceholder.typicode.com/todos"
-
-
-def first_line(id):
-    """ Fetch number of tasks """
-
-    todos_count = 0
-    todos_done = 0
-    done_list = []
-
-    resp_user = requests.get(users_url)
-    resp = requests.get(todos_url)
-
-    if resp_user.status_code == 200 and resp.status_code == 200:
-        us_ok = resp_user.json()
-        todo_ok = resp.json()
-        if not us_ok or not todo_ok:
-            print("error")
-    name = None
-    for j in resp_user:
-        if j[id] == id:
-            name = j[id]
-
-    for i in resp:
-        if i['userId'] == id:
-            todos_count += 1
-        if (i['completed'] and i['userId'] == id):
-            todos_done += 1
-            done_list.append(i.get('title'))
-    print("Employee {} is done with tasks({}/{}):".format(
-        name, todos_done, todos_count))
-    for done in done_list:
-        print("\t {}: OK".format(done.get('title')))
-
-
 if __name__ == "__main__":
-    first_line(int(sys.argv[1]))
+    api_url = "https://jsonplaceholder.typicode.com/"
+    us_ok = requests.get(api_url + "users/{}".format(
+        sys.argv[1])).json()
+    todo_ok = requests.get(
+        api_url + "todos", params={"userId": sys.argv[1]}).json()
+
+    done_list = []
+    for t in todo_ok:
+        if t.get("completed") is True:
+            done_list.append(t.get("title"))
+    print("Employee {} is done with tasks({}/{}):".format(
+        us_ok.get("name"), len(done_list), len(todo_ok)))
+    
+    for done in done_list:
+        print("\t {}:".format(done))
