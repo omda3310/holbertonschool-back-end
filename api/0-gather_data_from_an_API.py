@@ -3,6 +3,7 @@
 Checks student output for returning info from REST API
 """
 
+import json
 import requests
 import sys
 
