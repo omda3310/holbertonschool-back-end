@@ -4,19 +4,22 @@ import json
 import requests
 import sys
 
-
-if __name__ == "__main__":
+if name == "main":
     api_url = "https://jsonplaceholder.typicode.com/"
     inp = int(sys.argv[1])
-    us_ok = requests.get(api_url + "users/{}".format(inp)).json()
-    todo_ok = requests.get(api_url + "users/{}/todos".format(inp)).json()
+    user_info = requests.get(api_url + "users/{}".format(inp)).json()
+
+    # Fix the URL formatting for todos
+    todos_url = api_url + "users/{}/todos".format(inp)
+    todos_info = requests.get(todos_url).json()
 
     done_list = []
-    for t in todo_ok:
+    for t in todos_info:
         if t.get("completed") is True:
             done_list.append(t.get("title"))
-    print("Employee {} is done with tasks({}/{}):".format(us_ok.get("name"),
-          len(done_list), len(todo_ok)))
+    print("Employee {} is done with tasks({}/{}):".format(user_info.get("name"),
+          len(done_list), len(todos_info)))
 
     for done in done_list:
         print("\t {}:".format(done))
+
