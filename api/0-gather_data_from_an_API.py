@@ -1,24 +1,24 @@
 #!/usr/bin/python3
-"""test"""
-import json
-import requests
-import sys
+"""
+Uses the JSON placeholder api to query data about an employee
+"""
 
-if __name__ == "__main__":
-    api_url = "https://jsonplaceholder.typicode.com/"
-    inp = int(sys.argv[1])
-    user_info = requests.get(api_url + "users/{}".format(inp)).json()
+from requests import get
+from sys import argv
 
-    # Fix the URL formatting for todos
-    todos_url = api_url + "users/{}/todos".format(inp)
-    todos_info = requests.get(todos_url).json()
+if __name__ == '__main__':
+    main_url = 'https://jsonplaceholder.typicode.com'
+    todo_url = main_url + "/user/{}/todos".format(argv[1])
+    name_url = main_url + "/users/{}".format(argv[1])
+    todo_result = get(todo_url).json()
+    name_result = get(name_url).json()
 
-    done_list = []
-    for t in todos_info:
-        if t.get("completed") is True:
-            done_list.append(t.get("title"))
-    print("Employee {} is done with tasks({}/{}):".format(user_info.get("name"),
-          len(done_list), len(todos_info)))
-
-    for done in done_list:
-        print("\t {}:".format(done))
+    todo_num = len(todo_result)
+    todo_complete = len([todo for todo in todo_result
+                         if todo.get("completed")])
+    name = name_result.get("name")
+    print("Employee {} is done with tasks({}/{}):"
+          .format(name, todo_complete, todo_num))
+    for todo in todo_result:
+        if (todo.get("completed")):
+            print("\t {}".format(todo.get("title")))
