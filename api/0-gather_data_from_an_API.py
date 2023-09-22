@@ -3,13 +3,14 @@
 Uses the JSON placeholder api to query data about an employee
 """
 
+import json
 import sys
 import requests
 
 if __name__ == '__main__':
     main_url = 'https://jsonplaceholder.typicode.com'
-    todo_url = main_url + "/user/{}/todos".format(argv[1])
-    name_url = main_url + "/users/{}".format(argv[1])
+    todo_url = main_url + "/user/{}/todos".format(sys.argv[1])
+    name_url = main_url + "/users/{}".format(sys.argv[1])
     todo_result = requests.get(todo_url).json()
     name_result = requests.get(name_url).json()
 
