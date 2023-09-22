@@ -4,7 +4,7 @@ import json
 import requests
 import sys
 
-if name == "main":
+if __name__ == "__main__":
     api_url = "https://jsonplaceholder.typicode.com/"
     inp = int(sys.argv[1])
     user_info = requests.get(api_url + "users/{}".format(inp)).json()
