@@ -1,16 +1,10 @@
-#!/usr/bin/python3
-"""
-Checks student output for returning info from REST API
-"""
-
 import json
 import requests
 import sys
 
 if __name__ == "__main__":
     api_url = "https://jsonplaceholder.typicode.com/"
-    us_ok = requests.get(api_url + "users/{}".format(
-        sys.argv[1])).json()
+    us_ok = requests.get(api_url + "users/{}".format(id)).json()
     todo_ok = requests.get(
         api_url + "todos", params={"userId": sys.argv[1]}).json()
 
