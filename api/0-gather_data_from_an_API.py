@@ -9,7 +9,7 @@ if __name__ == "__main__":
     api_url = "https://jsonplaceholder.typicode.com/"
     inp = int(sys.argv[1])
     us_ok = requests.get(api_url + "users/{}".format(inp)).json()
-    todo_ok = requests.get(api_url + "user/{}/todos".format(inp)).json()
+    todo_ok = requests.get(api_url + "users/{}/todos".format(inp)).json()
 
     done_list = []
     for t in todo_ok:
