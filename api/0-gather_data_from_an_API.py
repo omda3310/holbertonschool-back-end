@@ -1,42 +1,43 @@
 #!/usr/bin/python3
 """
-Uses the JSON placeholder api to query data about an employee
+This script uses the JSON placeholder API to query data about an employee.
 """
 
-import json
 import requests
 from sys import argv
+
 URL = 'https://jsonplaceholder.typicode.com'
 
 
-def get_name(id):
-    """fetch user by Id"""
-    resp = requests.get(URL + "/users/{}".format(id))
-    user_infos = resp.json()
-    return user_infos.get('name')
+def get_name(user_id):
+    """Fetch user by ID."""
+    resp = requests.get(f"{URL}/users/{user_id}")
+    user_name = resp.json().get('name')
+    return user_name
 
 
-def get_todos(id):
-    resp = requests.get(URL + "/todos", params={'userId': id})
-    todo_infos = resp.json()
-    return todo_infos
+def get_todos(user_id):
+    resp = requests.get(f"{URL}/todos", params={'userId': user_id})
+    todos = resp.json()
+    return todos
 
 
-def display_infos(id):
-    name = get_name(id)
-    todo = get_todos(id)
-    todo_num = len(todo)
-    todo_complete = len([t for t in todo
-                         if t.get("completed")])
-    print("Employee {} is done with tasks({}/{}):"
-          .format(name, todo_complete, todo_num))
-    for t in todo:
-        if (t.get("completed")):
-            print("\t {}".format(t.get("title")))
+def display_infos(user_id):
+    user_name = get_name(user_id)
+    todos = get_todos(user_id)
+    num_todos = len(todos)
+    num_completed_todos = len([t for t in todos if t.get("completed")])
+    print("Employee {} is done with tasks({}/{}):".format(
+        user_name, num_completed_todos, num_todos))
+    for t in todos:
+        if t.get("completed"):
+            print(f"\t{t.get('title')}")
 
 
 if __name__ == '__main__':
     if len(argv) < 2:
+        print("Please provide a user ID as a command line argument.")
+        print("Usage: python script.py <user_id>")
         exit(1)
-    id = int(argv[1])
-    display_infos(id)
+    user_id = int(argv[1])
+    display_infos(user_id)
