@@ -3,8 +3,8 @@
 Uses the JSON placeholder api to query data about an employee
 """
 
-from requests import get
-from sys import argv
+import sys
+import requests
 
 if __name__ == '__main__':
     main_url = 'https://jsonplaceholder.typicode.com'
