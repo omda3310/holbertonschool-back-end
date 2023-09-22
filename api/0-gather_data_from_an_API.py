@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""test"""
 import json
 import requests
 import sys
