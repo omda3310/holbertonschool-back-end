@@ -8,7 +8,7 @@ import sys
 if __name__ == "__main__":
     api_url = "https://jsonplaceholder.typicode.com/"
     inp = int(sys.argv[1])
-    us_ok = requests.get(api_url + "users/{}".format(inp)).json()
+    us_ok = requests.get(f'{api_url}users/{inp}').json()
     username = us_ok.get("name")
     todo_oka = requests.get(f'{api_url}todos', params={"userId": inp})
     todo_ok = todo_oka.json()
