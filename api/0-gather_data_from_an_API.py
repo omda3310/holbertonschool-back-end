@@ -23,21 +23,22 @@ def get_todos(user_id):
 
 
 def display_infos(user_id):
-    user_name = get_name(user_id)
-    todos = get_todos(user_id)
-    num_todos = len(todos)
-    num_completed_todos = len([t for t in todos if t.get("completed")])
-    print("Employee {} is done with tasks({}/{}):".format(
-        user_name, num_completed_todos, num_todos))
-    for t in todos:
-        if t.get("completed"):
-            print(f"\t{t.get('title')}")
+    try:
+        user_name = get_name(user_id)
+        todos = get_todos(user_id)
+        num_todos = len(todos)
+        num_completed_todos = len([t for t in todos if t.get("completed")])
+        print("Employee {} is done with tasks({}/{}):".format(
+            user_name, num_completed_todos, num_todos))
+        for t in todos:
+            if t.get("completed"):
+                print(f"\t {t.get('title')}")
+    except requests.RequestException as ex:
+        print(f"Error: {ex}")
 
 
 if __name__ == '__main__':
     if len(argv) < 2:
-        print("Please provide a user ID as a command line argument.")
-        print("Usage: python script.py <user_id>")
         exit(1)
     user_id = int(argv[1])
     display_infos(user_id)
