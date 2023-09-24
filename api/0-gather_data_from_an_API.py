@@ -12,12 +12,14 @@ URL = 'https://jsonplaceholder.typicode.com'
 def get_name(user_id):
     """Fetch user by ID."""
     resp = requests.get(f"{URL}/users/{user_id}")
+    resp.raise_for_status()
     user_name = resp.json()
     return user_name.get('name')
 
 
 def get_todos(user_id):
     resp = requests.get(f"{URL}/todos", params={'userId': user_id})
+    resp.raise_for_status()
     todos = resp.json()
     return todos
 
@@ -41,4 +43,3 @@ if __name__ == '__main__':
         exit(1)
     user_id = int(argv[1])
     display_infos(user_id)
-    
