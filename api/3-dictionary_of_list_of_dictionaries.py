@@ -4,16 +4,14 @@ This script uses the JSON placeholder API to query data about an employee.
 """
 import json
 import requests
-from sys import argv
 URL = 'https://jsonplaceholder.typicode.com'
 
 
 def get_users():
     """Fetch user by ID."""
-    resp = requests.get(f'{URL}/users/{id}')
+    resp = requests.get(f'{URL}/users')
     resp.raise_for_status()
     return resp.json()
-    
 
 
 def get_todos(id):
@@ -48,8 +46,7 @@ def export_all_to_json():
 
         with open("todo_all employees.json", "w")as json_file:
             json.dump(all_data, json_file)
-        
-    
+
     except requests.RequestException as e:
         print(f"Error: {e}")
 
