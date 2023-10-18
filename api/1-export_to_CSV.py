@@ -44,7 +44,7 @@ def export_csv(id):
     """export"""
     try:
         user_infos = requests.get(f"{URL}/users/{id}").json()
-        user_name = user_infos.get('username')
+        user_name = user_infos.get('USERNAME')
         todos = get_todos(id)
 
         with open(f"{id}.csv", "w", newline='') as file_csv:
