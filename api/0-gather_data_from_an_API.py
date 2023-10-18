@@ -5,29 +5,29 @@ This script uses the JSON placeholder API to query data about an employee.
 
 import requests
 from sys import argv
-
 URL = 'https://jsonplaceholder.typicode.com'
 
 
 def get_name(user_id):
     """Fetch user by ID."""
-    resp = requests.get(f"{URL}/users/{user_id}")
+    resp = requests.get(f"{URL}/users/{id}")
     resp.raise_for_status()
     user_name = resp.json()
     return user_name.get('name')
 
 
-def get_todos(user_id):
-    resp = requests.get(f"{URL}/todos", params={'userId': user_id})
+def get_todos(id):
+    """Fetch TODO and return ID"""
+    resp = requests.get(f"{URL}/todos", params={'userId': id})
     resp.raise_for_status()
     todos = resp.json()
     return todos
 
 
-def display_infos(user_id):
+def display_infos(id):
     try:
-        user_name = get_name(user_id)
-        todos = get_todos(user_id)
+        user_name = get_name(id)
+        todos = get_todos(id)
         num_todos = len(todos)
         completed_todos = [t for t in todos if t.get("completed")]
         print("Employee {} is done with tasks({}/{}):".format(
