@@ -24,6 +24,7 @@ def get_todos(id):
     todos = resp.json()
     return todos
 
+
 def display_infos(id):
     try:
         user_name = get_name(id)
@@ -37,13 +38,14 @@ def display_infos(id):
     except requests.RequestException as e:
         print(f"Error: {e}")
 
+
 def export_csv(id):
     try:
         user_infos = requests.get(f'{URL}/users/{id}').json()
         user_name = user_infos.get('username')
         todos = get_todos(id)
 
-        with open(f'{id}.csv', "w", newline='') as file:
+        with open(f"{id}.csv", "w", newline='') as file:
             f_names = [
                 "USER_ID",
                 "USERNAME",
