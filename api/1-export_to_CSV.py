@@ -41,7 +41,6 @@ def display_infos(id):
 
 
 def export_csv(id):
-    """Export the todo list to csv file"""
     try:
         user_infos = requests.get(f"{URL}/users/{id}").json()
         user_name = user_infos.get('username')
