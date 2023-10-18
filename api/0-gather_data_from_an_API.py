@@ -8,7 +8,7 @@ from sys import argv
 URL = 'https://jsonplaceholder.typicode.com'
 
 
-def get_name(user_id):
+def get_name(id):
     """Fetch user by ID."""
     resp = requests.get(f"{URL}/users/{id}")
     resp.raise_for_status()
@@ -18,7 +18,7 @@ def get_name(user_id):
 
 def get_todos(id):
     """Fetch TODO and return ID"""
-    resp = requests.get(f"{URL}/todos", params={'userId': id})
+    resp = requests.get(f'{URL}/todos', params={'userId': id})
     resp.raise_for_status()
     todos = resp.json()
     return todos
@@ -29,7 +29,7 @@ def display_infos(id):
         user_name = get_name(id)
         todos = get_todos(id)
         num_todos = len(todos)
-        completed_todos = [t for t in todos if t.get("completed")]
+        completed_todos = [t for t in todos if t['completed']]
         print("Employee {} is done with tasks({}/{}):".format(
             user_name, len(completed_todos), num_todos))
         for t in completed_todos:
