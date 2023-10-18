@@ -44,7 +44,7 @@ def export_to_csv(id):
     """export"""
     try:
         user_infos = requests.get(f"{URL}/users/{id}").json()
-        user_name = user_infos.get('username')
+        employee_username = user_infos.get('username')
         todos = get_todos(id)
 
         with open(f"{id}.csv", "w", newline='') as csv_file:
@@ -59,7 +59,7 @@ def export_to_csv(id):
             for t in todos:
                 writer.writerow({
                     "USER_ID": id,
-                    "USERNAME": user_name,
+                    "USERNAME": employee_username,
                     "TASK_COMPLETED_STATUS": t['completed'],
                     "TASK_TITLE": t['title']
                 })
