@@ -31,8 +31,8 @@ def display_infos(id):
         todos = get_todos(id)
         num_todos = len(todos)
         completed_todos = [t for t in todos if t['completed']]
-        print(f"Employee {user_name}
-              is done with tasks({completed_todos}/{num_todos}):")
+        print(f"Employee {user_name} is done with tasks(
+            {completed_todos}/{num_todos}): ")
         for t in completed_todos:
             print(f"\t {t['title']}")
     except requests.RequestException as e:
