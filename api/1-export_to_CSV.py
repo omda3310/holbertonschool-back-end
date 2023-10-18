@@ -39,10 +39,11 @@ def display_infos(id):
 
 
 def export_to_csv(id):
-    """export"""
+    '''Export the TODO list to CSV for the given employee ID'''
     try:
-        user_infos = requests.get(f"{URL}/users/{id}").json()
-        employee_username = user_infos.get('username')
+        user_data = requests.get(f'{URL}/users/{id}').json()
+        employee_username = user_data.get('username')
+
         todos = get_todos(id)
 
         with open(f"{id}.csv", "w", newline='') as csv_file:
@@ -54,16 +55,16 @@ def export_to_csv(id):
             ]
             writer = csv.DictWriter(
                 csv_file, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
-            for t in todos:
+            for task in todos:
                 writer.writerow({
                     "USER_ID": id,
                     "USERNAME": employee_username,
-                    "TASK_COMPLETED_STATUS": t['completed'],
-                    "TASK_TITLE": t['title']
+                    "TASK_COMPLETED_STATUS": task['completed'],
+                    "TASK_TITLE": task['title']
                 })
 
     except requests.RequestException as e:
-        print(f"Error: {e}")
+        print(f"An error occurred: {e}")
 
 
 if __name__ == '__main__':
