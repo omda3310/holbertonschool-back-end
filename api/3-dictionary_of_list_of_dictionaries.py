@@ -14,7 +14,7 @@ def get_users():
     return resp.json()
 
 
-def get_todos(id):
+def get_todos(user_id):
     """Fetch TODO and return ID"""
     resp = requests.get(f'{URL}/todos', params={'userId': user_id})
     resp.raise_for_status()
