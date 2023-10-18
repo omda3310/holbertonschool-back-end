@@ -3,6 +3,7 @@
 This script uses the JSON placeholder API to query data about an employee.
 """
 
+import csv
 import requests
 from sys import argv
 URL = 'https://jsonplaceholder.typicode.com'
