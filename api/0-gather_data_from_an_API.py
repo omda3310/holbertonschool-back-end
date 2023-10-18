@@ -10,7 +10,7 @@ URL = 'https://jsonplaceholder.typicode.com'
 
 def get_name(id):
     """Fetch user by ID."""
-    resp = requests.get(f"{URL}/users/{id}")
+    resp = requests.get(f'{URL}/users/{id}')
     resp.raise_for_status()
     user_name = resp.json()
     return user_name.get('name')
@@ -34,8 +34,8 @@ def display_infos(id):
             user_name, len(completed_todos), num_todos))
         for t in completed_todos:
             print(f"\t {t['title']}")
-    except requests.RequestException as ex:
-        print(f"Error: {ex}")
+    except requests.RequestException as e:
+        print(f"Error: {e}")
 
 
 if __name__ == '__main__':
