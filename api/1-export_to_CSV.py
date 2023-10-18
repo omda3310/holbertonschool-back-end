@@ -24,6 +24,18 @@ def get_todos(id):
     todos = resp.json()
     return todos
 
+def display_infos(id):
+    try:
+        user_name = get_name(id)
+        todos = get_todos(id)
+        num_todos = len(todos)
+        completed_todos = [t for t in todos if t['completed']]
+        print("Employee {} is done with tasks({}/{}):".format(
+            user_name, len(completed_todos), num_todos))
+        for t in completed_todos:
+            print(f"\t {t['title']}")
+    except requests.RequestException as e:
+        print(f"Error: {e}")
 
 def export_csv(id):
     try:
