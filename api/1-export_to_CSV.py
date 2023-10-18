@@ -40,7 +40,7 @@ def display_infos(id):
         print(f"Error: {e}")
 
 
-def export_csv(id):
+def export_to_csv(id):
     """export"""
     try:
         user_infos = requests.get(f"{URL}/users/{id}").json()
@@ -72,4 +72,4 @@ if __name__ == '__main__':
     if len(argv) < 2:
         exit(1)
     user_id = int(argv[1])
-    export_csv(user_id)
+    export_to_csv(user_id)
