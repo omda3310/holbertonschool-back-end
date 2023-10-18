@@ -3,7 +3,6 @@
 This script uses the JSON placeholder API to query data about an employee.
 """
 
-import csv
 import requests
 from sys import argv
 URL = 'https://jsonplaceholder.typicode.com'
@@ -26,14 +25,13 @@ def get_todos(id):
 
 
 def display_infos(id):
-    """Display details"""
     try:
         user_name = get_name(id)
         todos = get_todos(id)
         num_todos = len(todos)
         completed_todos = [t for t in todos if t['completed']]
-        print(f"Employee {user_name} is done with"
-              f"tasks({completed_todos}/{num_todos}):")
+        print("Employee {} is done with tasks({}/{}):".format(
+            user_name, len(completed_todos), num_todos))
         for t in completed_todos:
             print(f"\t {t['title']}")
     except requests.RequestException as e:
