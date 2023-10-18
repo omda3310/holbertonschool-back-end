@@ -26,6 +26,7 @@ def get_todos(id):
 
 
 def display_infos(id):
+    """Display details"""
     try:
         user_name = get_name(id)
         todos = get_todos(id)
