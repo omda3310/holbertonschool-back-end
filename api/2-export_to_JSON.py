@@ -53,4 +53,3 @@ if __name__ == '__main__':
         exit(1)
     user_id = int(argv[1])
     export_to_json(user_id)
-
