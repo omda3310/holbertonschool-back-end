@@ -1,55 +1,56 @@
 #!/usr/bin/python3
-"""
-This script uses the JSON placeholder API to query data about an employee.
-"""
-
+'''
+This module defines the REST API
+still needs to be updated, random errors sometimes
+'''
 import json
 import requests
 from sys import argv
-URL = 'https://jsonplaceholder.typicode.com'
+BASE_URL = 'https://jsonplaceholder.typicode.com'
 
 
-def get_name(id):
-    """Fetch user by ID."""
-    resp = requests.get(f'{URL}/users/{id}')
-    resp.raise_for_status()
-    user_name = resp.json()
-    return user_name.get('name')
+def get_username(id):
+    '''Fetch employee username by ID'''
+    response = requests.get(f'{BASE_URL}/users/{id}')
+    response.raise_for_status()
+    user_data = response.json()
+    return user_data.get('username')
 
 
 def get_todos(id):
-    """Fetch TODO and return ID"""
-    resp = requests.get(f'{URL}/todos', params={'userId': id})
-    resp.raise_for_status()
-    todos = resp.json()
-    return todos
+    '''Fetch TODOs for the given employee ID'''
+    response = requests.get(f'{BASE_URL}/todos', params={'userId': id})
+    response.raise_for_status()
+    return response.json()
 
 
 def export_to_json(id):
-    """Export to json"""
+    '''Export the TODO list to JSON for the given employee ID '''
     try:
-        employee_username = get_name(id)
+        employee_username = get_username(id)
         todos = get_todos(id)
 
-        task_list = []
-        for t in todos:
-            t_data = {
-                "task": t['title'],
-                "completed": t['completed'],
+        tasks_list = []
+        for task in todos:
+            task_data = {
+                "task": task['title'],
+                "completed": task['completed'],
                 "username": employee_username
             }
-            task_list.append(t_data)
+            tasks_list.append(task_data)
 
-        json_structure = {str(id): task_list}
+        # Construct the final JSON structure
+        json_structure = {str(id): tasks_list}
         with open(f"{id}.json", "w") as json_file:
             json.dump(json_structure, json_file)
 
     except requests.RequestException as e:
-        print(f"An error occured: {e}")
+        print(f"An error occurred: {e}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     if len(argv) < 2:
         exit(1)
-    user_id = int(argv[1])
-    export_to_json(user_id)
+
+    employee_id = int(argv[1])
+    export_to_json(employee_id)
