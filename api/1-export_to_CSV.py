@@ -32,8 +32,8 @@ def display_infos(id):
         todos = get_todos(id)
         num_todos = len(todos)
         completed_todos = [t for t in todos if t['completed']]
-        print(f"Employee {user_name} is done with tasks(
-            {completed_todos}/{num_todos}): ")
+        print(f"Employee {user_name} is done with"
+              f"tasks({completed_todos}/{num_todos}):")
         for t in completed_todos:
             print(f"\t {t['title']}")
     except requests.RequestException as e:
@@ -41,6 +41,7 @@ def display_infos(id):
 
 
 def export_csv(id):
+    """export"""
     try:
         user_infos = requests.get(f"{URL}/users/{id}").json()
         user_name = user_infos.get('username')
@@ -62,6 +63,7 @@ def export_csv(id):
                     "TASK_COMPLETED_STATUS": t['completed'],
                     "TASK_TITLE": t['title']
                 })
+
     except requests.RequestException as e:
         print(f"Error: {e}")
 
