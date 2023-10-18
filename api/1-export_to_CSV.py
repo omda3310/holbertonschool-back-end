@@ -44,20 +44,20 @@ def export_csv(id):
     """export"""
     try:
         user_infos = requests.get(f"{URL}/users/{id}").json()
-        user_name = user_infos.get('USERNAME')
+        user_name = user_infos.get('username')
         todos = get_todos(id)
 
-        with open(f"{id}.csv", "w", newline='') as file_csv:
+        with open(f"{id}.csv", "w", newline='') as csv_file:
             fieldnames = [
                 "USER_ID",
                 "USERNAME",
                 "TASK_COMPLETED_STATUS",
                 "TASK_TITLE"
             ]
-            output = csv.DictWriter(
-                file_csv, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
+            writer = csv.DictWriter(
+                csv_file, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
             for t in todos:
-                output.writerow({
+                writer.writerow({
                     "USER_ID": id,
                     "USERNAME": user_name,
                     "TASK_COMPLETED_STATUS": t['completed'],
