@@ -41,19 +41,19 @@ def display_infos(id):
 
 def export_csv(id):
     try:
-        user_infos = requests.get(f'{URL}/users/{id}').json()
+        user_infos = requests.get(f"{URL}/users/{id}").json()
         user_name = user_infos.get('username')
         todos = get_todos(id)
 
         with open(f"{id}.csv", "w", newline='') as file:
-            f_names = [
+            fieldnames = [
                 "USER_ID",
                 "USERNAME",
                 "TASK_COMPLETED_STATUS",
                 "TASK_TITLE"
             ]
             output = csv.DictWriter(
-                file, fieldnames=f_names, quoting=csv.QUOTE_ALL)
+                file, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
             for t in todos:
                 output.writerow({
                     "USER_ID": id,
